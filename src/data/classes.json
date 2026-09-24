@@ -1,0 +1,6 @@
+{
+  "classes": [
+    { "id": "c1", "name": "Biology 101", "schedule": "Mon/Wed/Fri 09:00" },
+    { "id": "c2", "name": "Calculus 201", "schedule": "Tue/Thu 11:00" }
+  ]
+}

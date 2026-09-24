@@ -1,0 +1,8 @@
+{
+  "students": [
+    { "id": "s1", "name": "Alice Johnson", "avatar": "", "classId": "c1" },
+    { "id": "s2", "name": "Bob Smith", "avatar": "", "classId": "c1" },
+    { "id": "s3", "name": "Carla Gomez", "avatar": "", "classId": "c2" },
+    { "id": "s4", "name": "Daniel Lee", "avatar": "", "classId": "c2" }
+  ]
+}
