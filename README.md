@@ -15,4 +15,5 @@ Notes:
 - Data seeds are in `src/data`.
 - Replace service implementations with `fetch`/`axios` to integrate a Node.js backend later.
 
-## Screenshot
+## Screenshots
+Dashboard: ![Dashboard](./assets/screenshots/dashboard.png)
