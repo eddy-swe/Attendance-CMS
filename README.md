@@ -16,4 +16,4 @@ Notes:
 - Replace service implementations with `fetch`/`axios` to integrate a Node.js backend later.
 
 ## Screenshots
-Dashboard: ![Dashboard](./assets/screenshots/dashboard.png)
+Dashboard: ![Dashboard](./src/assets/screenshots/dashboard.png)
