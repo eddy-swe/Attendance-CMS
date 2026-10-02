@@ -1,45 +1,51 @@
 import mock from '../data/attendance.json'
 import { set as lsSet, get as lsGet } from './localStorageService'
+import { fetchStudents } from './studentService'
+import { fetchClasses } from './classService'
+import { upsertRecords, dashboardStats } from '../utils/attendanceStats'
+import { todayISO } from '../utils/dates'
 
 const STORAGE_KEY = 'attendance_records'
 
-export const fetchAttendanceByClassDate = (classId, date) => {
-  return new Promise((resolve) => {
-    setTimeout(async () => {
-      const stored = (await lsGet(STORAGE_KEY)) || mock.records
-      const filtered = stored.filter((r) => r.classId === classId && r.date === date)
-      resolve(filtered)
-    }, 200)
-  })
+const loadRecords = async () => {
+  const stored = await lsGet(STORAGE_KEY)
+  return Array.isArray(stored) ? stored : mock.records
 }
 
-export const saveAttendanceRecords = (records) => {
-  return new Promise(async (resolve) => {
-    const existing = (await lsGet(STORAGE_KEY)) || mock.records
-    // naive merge: append new session
-    const merged = [...existing, ...records]
-    await lsSet(STORAGE_KEY, merged)
-    setTimeout(() => resolve({ success: true }), 300)
-  })
+export const fetchAttendanceByClassDate = async (classId, date) => {
+  const records = await loadRecords()
+  return records.filter((r) => r.classId === classId && r.date === date)
 }
 
-export const getSummary = () => {
-  return new Promise(async (resolve) => {
-    const records = (await lsGet(STORAGE_KEY)) || mock.records
-    const totalStudents = new Set(records.map((r) => r.studentId)).size
-    const classesToday = new Set(records.map((r) => r.classId)).size
-    const present = records.filter((r) => r.status === 'present').length
-    const avgAttendance = records.length ? Math.round((present / records.length) * 100) : 0
-    const missing = records.filter((r) => r.status === 'missing').length
-    resolve({ totalStudents, classesToday, avgAttendance, missing })
-  })
+// classId may be empty to include every class. Dates are inclusive "YYYY-MM-DD" strings.
+export const fetchAttendanceRange = async (classId, start, end) => {
+  const records = await loadRecords()
+  return records
+    .filter((r) => (!classId || r.classId === classId) && r.date >= start && r.date <= end)
+    .sort((a, b) => b.date.localeCompare(a.date) || a.studentName.localeCompare(b.studentName))
 }
 
-export const getRecentActivity = () => {
-  return new Promise(async (resolve) => {
-    const records = (await lsGet(STORAGE_KEY)) || mock.records
-    const sorted = [...records].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
-    const items = sorted.slice(0, 10).map((r) => ({ id: r.id, text: `${r.date} — ${r.studentName} — ${r.status}` }))
-    resolve(items)
-  })
+// Saving the same class/date again updates the existing records instead of duplicating them.
+export const saveAttendanceRecords = async (records) => {
+  const existing = await loadRecords()
+  await lsSet(STORAGE_KEY, upsertRecords(existing, records))
+  return { success: true }
+}
+
+export const getSummary = async () => {
+  const [records, students, classes] = await Promise.all([
+    loadRecords(),
+    fetchStudents(),
+    fetchClasses(),
+  ])
+  return dashboardStats({ records, students, classes, today: todayISO() })
+}
+
+export const getRecentActivity = async () => {
+  const records = await loadRecords()
+  const sorted = [...records].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt))
+  return sorted.slice(0, 10).map((r) => ({
+    id: r.id,
+    text: `${r.date} — ${r.studentName} — ${r.status}`,
+  }))
 }

@@ -1,16 +1,25 @@
 # Student Attendance Management
-## LIVE: [SEE DOMO!](https://attendance-cms-henna.vercel.app/)
+## LIVE: [https://student-attendance-management.vercel.app/](https://student-attendance-management.vercel.app/)
 This is a Vite + React + Tailwind frontend page for a prospective Student Attendance Management System.
 
 Quick start:
 
 ```bash
-cd /home/eddy/Desktop/CMS
+git clone https://github.com/eddy-swe/Attendance-CMS.git
+cd Attendance-CMS
 npm install
 npm run dev
 ```
+
+Other scripts:
+
+```bash
+npm run build   # production build
+npm test        # unit tests for the attendance logic
+```
+
 ## Screenshots
-### Dashboard: ![Dashboard](./src/assets/screenshots/dashboard.png) 
+### Dashboard: ![Dashboard](./src/assets/screenshots/dashboard.png)
 
 Notes:
 - Services in `src/services` return Promises and use localStorage for persistence.

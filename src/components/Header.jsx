@@ -19,14 +19,9 @@ export default function Header() {
             {today}
           </div>
         </div>
-        <div className="flex items-center gap-3">
-          <select className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100">
-            <option>All Classes</option>
-          </select>
-          <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
-            <div className="h-8 w-8 rounded-full bg-indigo-100" />
-            <div className="pr-2 text-sm font-medium text-slate-700">Admin</div>
-          </div>
+        <div className="flex items-center gap-2 rounded-full border border-slate-200 bg-white px-2 py-1.5 shadow-sm">
+          <div className="h-8 w-8 rounded-full bg-indigo-100" aria-hidden="true" />
+          <div className="pr-2 text-sm font-medium text-slate-700">Admin</div>
         </div>
       </div>
     </header>

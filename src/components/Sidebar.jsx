@@ -1,27 +1,21 @@
 import React from "react";
 import { Link, useLocation } from "react-router-dom";
-import { Home, CheckSquare, BookOpen, BarChart2 } from "lucide-react";
-
-const items = [
-  { to: "/dashboard", icon: Home, label: "Dashboard" },
-  { to: "/attendance", icon: CheckSquare, label: "Take Attendance" },
-  { to: "/classes", icon: BookOpen, label: "Classes & Students" },
-  { to: "/reports", icon: BarChart2, label: "Attendance Reports" },
-];
+import { navItems } from "./navItems";
 
 export default function Sidebar() {
   const loc = useLocation();
   return (
-    <aside className="hidden w-72 bg-slate-900 text-slate-100 lg:block">
+    <aside className="hidden w-72 shrink-0 bg-slate-900 text-slate-100 lg:block">
       <div className="border-b border-slate-800 p-6">
         <h1 className="text-lg font-semibold tracking-wide">Attendance CMS</h1>
         <p className="mt-1 text-sm text-slate-400">Instructor Admin</p>
       </div>
-      <nav className="p-4">
-        {items.map((it) => (
+      <nav className="p-4" aria-label="Main">
+        {navItems.map((it) => (
           <Link
             key={it.to}
             to={it.to}
+            aria-current={loc.pathname === it.to ? "page" : undefined}
             className={`mb-1 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-colors ${
               loc.pathname === it.to
                 ? "bg-indigo-600 text-white shadow"
