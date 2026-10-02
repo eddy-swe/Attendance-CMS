@@ -14,3 +14,5 @@ Notes:
 - Services in `src/services` return Promises and use localStorage for persistence.
 - Data seeds are in `src/data`.
 - Replace service implementations with `fetch`/`axios` to integrate a Node.js backend later.
+
+## Screenshot
