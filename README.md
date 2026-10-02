@@ -1,4 +1,4 @@
-# Student Attendance Management (Phase 1)
+# Student Attendance Management
 ## LIVE: [https://student-attendance-management.vercel.app/](https://student-attendance-management.vercel.app/)
 This is a Vite + React + Tailwind frontend page for a prospective Student Attendance Management System.
 
