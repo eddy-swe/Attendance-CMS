@@ -1,4 +1,3 @@
-import { get } from './localStorageService'
 import mock from '../data/students.json'
 
 export const fetchStudents = (classId) => {

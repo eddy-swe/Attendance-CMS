@@ -1,15 +1,21 @@
 const KEY_PREFIX = 'sam_' // student attendance management
 
-export const get = (key) => {
-  return new Promise((resolve) => {
+// Reads never throw: corrupted or unavailable storage is treated as "no data".
+export const get = async (key) => {
+  try {
     const raw = localStorage.getItem(KEY_PREFIX + key)
-    resolve(raw ? JSON.parse(raw) : null)
-  })
+    return raw ? JSON.parse(raw) : null
+  } catch {
+    return null
+  }
 }
 
-export const set = (key, value) => {
-  return new Promise((resolve) => {
+// Writes reject with a readable error so the UI can tell the user the save failed.
+export const set = async (key, value) => {
+  try {
     localStorage.setItem(KEY_PREFIX + key, JSON.stringify(value))
-    resolve(true)
-  })
+    return true
+  } catch {
+    throw new Error('Could not save data in this browser (storage may be full or disabled).')
+  }
 }
