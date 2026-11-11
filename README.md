@@ -1,6 +1,8 @@
 # Student Attendance Management
-## LIVE: [https://student-attendance-management.vercel.app/](https://student-attendance-management.vercel.app/)
-This is a Vite + React + Tailwind frontend page for a prospective Student Attendance Management System.
+This is a Vite + React + Tailwind frontend page for a **prospective** Student Attendance Management System.
+
+- LIVE [**HERE!**](https://student-attendance-management.vercel.app/)
+
 
 Quick start:
 
@@ -19,7 +21,7 @@ npm test        # unit tests for the attendance logic
 ```
 
 ## Screenshots
-### Dashboard: ![Dashboard](./src/assets/screenshots/dashboard.png)
+Dashboard: ![Dashboard](./src/assets/screenshots/dashboard.png)
 
 Notes:
 - Services in `src/services` return Promises and use localStorage for persistence.
