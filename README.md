@@ -1,7 +1,7 @@
 # Student Attendance Management
 This is a Vite + React + Tailwind frontend page for a **prospective** Student Attendance Management System.
 
-- LIVE [**HERE!**](https://student-attendance-management.vercel.app/)
+- [**LIVE HERE!**](https://student-attendance-management.vercel.app/)
 
 
 Quick start:
